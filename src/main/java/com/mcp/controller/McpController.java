@@ -69,26 +69,6 @@ public class McpController {
         return ResponseEntity.ok("Number of records in card_transactions: " + count);
     }
 
-    @GetMapping("/accounts")
-    public ResponseEntity<List<Account>> getAllAccounts() {
-        return ResponseEntity.ok(accountRepository.findAll());
-    }
-
-    @GetMapping("/customer-relationships")
-    public ResponseEntity<List<CustomerRelationship>> getAllCustomerRelationships() {
-        return ResponseEntity.ok(customerRelationshipRepository.findAll());
-    }
-
-    @GetMapping("/casa-transactions")
-    public ResponseEntity<List<CasaTransaction>> getAllCasaTransactions() {
-        return ResponseEntity.ok(casaTransactionRepository.findAll());
-    }
-
-    @GetMapping("/card-transactions")
-    public ResponseEntity<List<CardTransaction>> getAllCardTransactions() {
-        return ResponseEntity.ok(cardTransactionRepository.findAll());
-    }
-
     @GetMapping("/database-connection")
     public ResponseEntity<String> getDatabaseConnectionDetails() {
         return ResponseEntity.ok("Successfully connected to PostgreSQL database 'mcp_db' with the following details:\n" +
