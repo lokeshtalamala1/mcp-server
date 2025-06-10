@@ -1,11 +1,9 @@
 package com.mcp.model;
 
 import jakarta.persistence.*;
-import lombok.Data;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-@Data
 @Entity
 @Table(name = "card_transactions")
 public class CardTransaction {
@@ -36,6 +34,25 @@ public class CardTransaction {
 
     @Column(name = "dr_cr_flag")
     private String drCrFlag;
+
+    public String getTxnId() { return txnId; }
+    public void setTxnId(String txnId) { this.txnId = txnId; }
+    public String getAccountId() { return accountId; }
+    public void setAccountId(String accountId) { this.accountId = accountId; }
+    public String getCustomerId() { return customerId; }
+    public void setCustomerId(String customerId) { this.customerId = customerId; }
+    public LocalDate getTxnDate() { return txnDate; }
+    public void setTxnDate(LocalDate txnDate) { this.txnDate = txnDate; }
+    public LocalTime getTxnTime() { return txnTime; }
+    public void setTxnTime(LocalTime txnTime) { this.txnTime = txnTime; }
+    public String getMerchantName() { return merchantName; }
+    public void setMerchantName(String merchantName) { this.merchantName = merchantName; }
+    public String getMccCode() { return mccCode; }
+    public void setMccCode(String mccCode) { this.mccCode = mccCode; }
+    public Double getAmount() { return amount; }
+    public void setAmount(Double amount) { this.amount = amount; }
+    public String getDrCrFlag() { return drCrFlag; }
+    public void setDrCrFlag(String drCrFlag) { this.drCrFlag = drCrFlag; }
 
     // Getters and setters...
 }

@@ -1,0 +1,12 @@
+com\mcp\model\CasaTransaction.class
+com\mcp\repository\CardTransactionRepository.class
+com\mcp\config\DatabaseConfig.class
+com\mcp\controller\GlobalExceptionHandler.class
+com\mcp\model\CustomerRelationship.class
+com\mcp\model\Account.class
+com\mcp\model\CardTransaction.class
+com\mcp\repository\CustomerRelationshipRepository.class
+com\mcp\controller\McpController.class
+com\mcp\repository\CasaTransactionRepository.class
+com\mcp\repository\AccountRepository.class
+com\mcp\McpServerApplication.class
