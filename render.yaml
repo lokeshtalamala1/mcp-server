@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: mcp-server
+    env: java
+    buildCommand: ./mvnw clean package -DskipTests
+    startCommand: java -jar target/mcp-server-0.0.1-SNAPSHOT.jar
+    envVars:
+      - key: JDBC_DATABASE_URL
+        sync: false
+      - key: JDBC_DATABASE_USERNAME
+        sync: false
+      - key: JDBC_DATABASE_PASSWORD
+        sync: false
+      - key: SPRING_PROFILES_ACTIVE
+        value: prod 
