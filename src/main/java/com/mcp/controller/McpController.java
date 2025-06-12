@@ -1,13 +1,16 @@
 package com.mcp.controller;
 
-import com.mcp.model.Account;
-import com.mcp.model.CardTransaction;
-import com.mcp.model.CasaTransaction;
-import com.mcp.model.CustomerRelationship;
+import com.mcp.entity.Account;
+import com.mcp.entity.CardTransaction;
+import com.mcp.entity.CasaTransaction;
+import com.mcp.entity.CustomerRelationship;
+import com.mcp.model.McpMessage;
 import com.mcp.repository.AccountRepository;
 import com.mcp.repository.CardTransactionRepository;
 import com.mcp.repository.CasaTransactionRepository;
 import com.mcp.repository.CustomerRelationshipRepository;
+import com.mcp.service.McpWebSocketService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +19,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/mcp")
+@RequiredArgsConstructor
 public class McpController {
 
-    @Autowired
-    private AccountRepository accountRepository;
-    @Autowired
-    private CustomerRelationshipRepository customerRelationshipRepository;
-    @Autowired
-    private CasaTransactionRepository casaTransactionRepository;
-    @Autowired
-    private CardTransactionRepository cardTransactionRepository;
+    private final AccountRepository accountRepository;
+    private final CustomerRelationshipRepository customerRelationshipRepository;
+    private final CasaTransactionRepository casaTransactionRepository;
+    private final CardTransactionRepository cardTransactionRepository;
+    private final McpWebSocketService mcpWebSocketService;
 
     @GetMapping("/")
     public ResponseEntity<String> home() {
@@ -40,9 +41,9 @@ public class McpController {
     }
 
     @PostMapping("/query")
-    public ResponseEntity<?> handleQuery(@RequestBody String query) {
-        // TODO: Implement query handling logic
-        return ResponseEntity.ok("Query received: " + query);
+    public ResponseEntity<McpMessage> sendQuery(@RequestBody McpMessage message) {
+        mcpWebSocketService.sendMessageToLLM(message);
+        return ResponseEntity.ok(message);
     }
 
     @GetMapping("/accounts/count")
@@ -95,6 +96,12 @@ public class McpController {
                 "URL: jdbc:postgresql://localhost:5432/mcp_db\n" +
                 "Username: postgres\n" +
                 "Password: lokit@181903");
+    }
+
+    @GetMapping("/status/{messageId}")
+    public ResponseEntity<McpMessage> getMessageStatus(@PathVariable String messageId) {
+        // Implementation for checking message status
+        return ResponseEntity.ok().build();
     }
 
     @ExceptionHandler(Exception.class)
